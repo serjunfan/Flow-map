@@ -1,3 +1,4 @@
+// Get the topojson from world-atlas and convert to geojson data for later to graph the World
 import React, { useState, useEffect } from 'react';
 import { json } from 'd3';
 import { feature, mesh } from 'topojson';
