@@ -2,4 +2,6 @@
 
 Only 2020's data were graphed. 
 
-Only countries between countries immigrants flor were graphed.
+Only countries between countries immigrants flow were graphed.
+
+Some immigrants data were .. which were ignored.
