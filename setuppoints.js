@@ -1,3 +1,4 @@
+// Set up the coordinates for later to graph the Lines. Only 2020's data are set up 
 export const setuppoints = ( countrytable,immidata ) => {
     const des = "Region, development group, country or area of destination";
     const ori = "Region, development group, country or area of origin";
