@@ -1,5 +1,5 @@
 import { geoNaturalEarth1, geoPath, geoGraticule } from 'd3';
-
+// Graph the World map and the line based on immigrants
 const projection = geoNaturalEarth1();
 const path = geoPath(projection);
 const graticule = geoGraticule();
