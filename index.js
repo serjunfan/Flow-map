@@ -1,3 +1,4 @@
+//Main function. Actually a React H
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { useData } from './useData';
