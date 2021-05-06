@@ -1,3 +1,4 @@
+//A function that gets the center point Latitude and  Longitude by Summing all the points Latitude and  Longitude and divide them by how many points.
 export const getlalo = a =>{
   let lacoorsum = 0;
   let locoorsum = 0; 
