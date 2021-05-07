@@ -19,9 +19,9 @@ const App = () => {
   }
   //console.log(graphdata);
   const countrytable = new Map();
-  graphdata.countries.features.forEach( d =>{
+  graphdata.countries.features.forEach( (d,i) =>{
    countrytable.set(d.properties.name
-    ,(getlalo(d.geometry.coordinates)));
+    ,(getlalo(d.geometry.coordinates, i)));
   })
   setuppoints(countrytable,immidata);
   console.log(immidata);
