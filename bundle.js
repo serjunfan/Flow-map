@@ -1,9 +1,10 @@
-// Final javascript file
 (function (React$1, ReactDOM, d3, topojson) {
   'use strict';
 
   var React$1__default = 'default' in React$1 ? React$1['default'] : React$1;
   ReactDOM = ReactDOM && Object.prototype.hasOwnProperty.call(ReactDOM, 'default') ? ReactDOM['default'] : ReactDOM;
+
+  // Get the topojson from world-atlas and convert to geojson data for later to graph the World
 
   const jsonUrl = 'https://unpkg.com/world-atlas@2.0.2/countries-50m.json';
 
@@ -24,6 +25,7 @@
     return data;
   };
 
+  // Graph the World map and the line based on immigrants
   const projection = d3.geoNaturalEarth1();
   const path = d3.geoPath(projection);
   const graticule = d3.geoGraticule();
@@ -45,6 +47,8 @@
     )
   );
 
+  // Get the immidata from my Gist
+
   const dataUrl ="https://gist.githubusercontent.com/serjunfan/b3f0b16e32c153b8393338bf997bdc08/raw/4a0b8e022f09de28bfae808da66bed1b311c61e7/2020.csv";
   const immiData = () => {
     const [data, setData] = React$1.useState(null);
@@ -55,11 +59,13 @@
     return data;
   };
 
-  const getlalo = a =>{
+  //A function that gets the center point Latitude and  Longitude by Summing all the points Latitude and  Longitude and divide them by how many points.
+  //Two Graph data coordinates are different than others so i tweaked a little bit code to fix the bug of NaN 
+  const getlalo = (a,index) =>{
     let lacoorsum = 0;
     let locoorsum = 0; 
     let totalcoordinates = a.length;
-    if( totalcoordinates == 1){
+    if( totalcoordinates == 1 || index == 102 || index == 128){
     a.forEach( d => {
       let totalpoints = d.length;
       let lacoor = 0;
@@ -94,6 +100,7 @@
     return point;
   };
 
+  // Set up the coordinates for later to graph the Lines. Only 2020's data are set up 
   const setuppoints = ( countrytable,immidata ) => {
       const des = "Region, development group, country or area of destination";
       const ori = "Region, development group, country or area of origin";
@@ -121,24 +128,24 @@
       }
     };
 
+  //Main function. Actually a React H
+
   const width = 960;
   const height = 500;
-  //const projection = d3.geoNaturalEarth1();
 
   const App = () => {
     const graphdata = useData();
     const immidata = immiData();
     if (!graphdata || !immidata ) {
       return React$1__default.createElement( 'pre', null, "Loading..." );
-    }
-    //console.log(graphdata);
+    } 
     const countrytable = new Map();
-    graphdata.countries.features.forEach( d =>{
+    graphdata.countries.features.forEach( (d,i) =>{
      countrytable.set(d.properties.name
-      ,(getlalo(d.geometry.coordinates)));
+      ,(getlalo(d.geometry.coordinates, i)));
     });
     setuppoints(countrytable,immidata);
-    console.log(immidata);
+    
 
     return (
       React$1__default.createElement( 'svg', { width: width, height: height },
