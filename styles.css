@@ -6,9 +6,7 @@ body {
 pre {
   font-size: 7em;
 }
-.marks .country {
-  fill: #137B80;
-}
+
 .marks .sphere {
   fill: #ececec;
 }
@@ -19,8 +17,4 @@ pre {
 .marks .graticules {
   fill: none;
   stroke: #dadada;
-}
-.marks .flows{
-  fill: none;
-  stroke: #43A4A8;
 }
