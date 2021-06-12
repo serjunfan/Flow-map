@@ -37,7 +37,7 @@ export const Bar = ( {filterdata} ) => {
           innerHeight={barHeight}
           tickOffset={8}
         />
-      <AxisLeft yScale={yScale} innerWidth={innerWidth} tickFormat={d3.format(".2s")} 
+      <AxisLeft yScale={yScale} innerWidth={innerWidth} tickFormat={d3.format("~s")} 
         tickOffset={5} ticknum={4}/>
       <Marks
         top10data={top10data}
