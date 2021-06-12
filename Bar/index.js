@@ -1,6 +1,3 @@
-import React from 'react';
-import { csv, arc, pie, scaleBand, scaleLinear, max, format } from 'd3';
-import { AxisBottom } from './AxisBottom';
 import { AxisLeft } from './AxisLeft';
 import { Marks } from './Marks';
 const width = 960;
@@ -37,7 +34,8 @@ export const Bar = ( {filterdata} ) => {
           innerHeight={barHeight}
           tickOffset={8}
         />
-      <AxisLeft yScale={yScale} innerWidth={innerWidth} tickOffset={5} />
+      <AxisLeft yScale={yScale} innerWidth={innerWidth} tickFormat={d3.format(".2s")} 
+        tickOffset={5} ticknum={4}/>
       <Marks
         top10data={top10data}
         xScale={xScale}
