@@ -10,4 +10,4 @@ Learn React and D3.js mainly from: https://www.youtube.com/watch?v=2LhoCfjm8R4
 
 Bundle Algorithm from https://github.com/upphiminn/d3.ForceBundle
 
-![image](https://github.com/serjunfan/Flow-map/blob/main/Map.jpg)
+![image](https://github.com/serjunfan/Flow-map/blob/main/Map1.jpg)
