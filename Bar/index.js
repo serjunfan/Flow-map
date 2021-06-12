@@ -1,3 +1,6 @@
+import React from 'react';
+import { csv, arc, pie, scaleBand, scaleLinear, max, format } from 'd3';
+import { AxisBottom } from './AxisBottom';
 import { AxisLeft } from './AxisLeft';
 import { Marks } from './Marks';
 const width = 960;
