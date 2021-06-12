@@ -1,6 +1,9 @@
 //Main function. Actually a React H
 import React, { useState ,useRef,useEffect} from 'react';
 import ReactDOM from 'react-dom';
+import { useData } from './useData';
+import { immiData1 } from './immiData1';
+import { coorData } from './coordata';
 import { Marks } from './Marks';
 
 const width = 960;
@@ -20,12 +23,20 @@ const App = () => {
       });
     zoomFunc(svg);
   } )
+  const graphdata = useData();
+  const coordata = coorData();
+  const immidata = immiData1();
+  if (!graphdata || !immidata || !coordata) {
+    return <pre>Loading...</pre>;
+  }
   return (
     <svg width={width} height={height} ref={svgRef}
       fill="current" stroke="current">
       <g ref={gRef} >
-         <rect fill={"#110577"} width={width} height={height}/>
-          <Marks />
+         <rect fill={"#3b5bb5"} width={width} height={height}/>
+          <Marks graphdata={graphdata}
+            immidata={immidata}
+            coordata={coordata}/>
       </g>
     </svg>
   );
