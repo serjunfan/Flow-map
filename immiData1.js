@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { csv } from 'd3';
 
 
-const dataUrl ="https://gist.githubusercontent.com/serjunfan/11f2e26371afcb897fdbed8ac26ff5bf/raw/ec9a0d9b4e6c5dbce4a65eb1cf7730f868c9704f/2020_Russia_ver1.csv";
+const dataUrl ="https://gist.githubusercontent.com/serjunfan/3dddca9b501a61b1c8922bfcabb44a5e/raw/8e6f9369be2467fddc98efdf8b4db8978520a8e3/2020(Russia_ver3).csv";
 export const immiData1 = () => {
   const [data, setData] = useState(null);
   useEffect(() => {
