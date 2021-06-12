@@ -3,12 +3,10 @@ import {
   geoPath,
   geoGraticule,
 } from 'd3';
-import { useData } from './useData';
-import { immiData1 } from './immiData1';
 import { setUpdata } from './setUpdata';
-import { coorData } from './coordata';
-
-import React, { useState, useEffect } from 'react';
+import { flowdata } from './flowdata';
+import React, { useState, useEffect,useMemo } from 'react';
+import { Bar } from './Bar/index.js';
 // Graph the World map and the line based on immigrants
 const projection = geoNaturalEarth1();
 const path = geoPath(projection);
@@ -19,7 +17,7 @@ const d3line = d3.line()
       .y(function(d){ return d.y; })
       .curve(d3.curveLinear);
 
-export const Marks = () => {
+export const Marks = ({graphdata,coordata,immidata}) => {
   const [selected, setSelected] = useState('Brazil');
   const handleClick = (e) => {
     if (selected == e.currentTarget.getAttribute('title')) {
@@ -29,14 +27,10 @@ export const Marks = () => {
     }
   };
 
-  const coordata = coorData();
-  const graphdata = useData();
-  const immidata = immiData1();
-  if (!graphdata || !immidata || !coordata) {
-    return <pre>Loading...</pre>;
-  }
   setUpdata(coordata, immidata);
-  let filterdata = [] ;
+  
+  let filterdata = []; 
+  
   if( selected !== null){ 
    filterdata = immidata.filter(
     (d) =>
@@ -47,36 +41,12 @@ export const Marks = () => {
   }
   else
     filterdata = immidata;
-  const nodes = {};
-  let results = [];
-  if( filterdata.length != 0 ){
-  filterdata.forEach( (d,i)=> {
-    nodes[`${i}`] = {x:projection(d.coordinates[0])[0] ,y:projection(d.coordinates[0])[1]} ;
-  })
-  console.log(Object.keys(nodes).length);
-    nodes[`${Object.keys(nodes).length}`] = {x:projection(filterdata[0].coordinates[1])[0],
-                           y:projection(filterdata[0].coordinates[1])[1]};
-    
-    const edges = filterdata.map( (d,i) => {
-     let obj = {};
-     obj['source'] = `${Object.keys(nodes).length-1}`;
-     obj['target'] = `${i}`;
-     return obj;
-   })
-    console.log(nodes);
-    console.log(edges);
-  const fbundling = d3.ForceEdgeBundling()   
-				.nodes(nodes)
-				.edges(edges)
-  
-	 results = fbundling();
-  }
-  
-  console.log(filterdata);
-  console.log(selected);
+
+  const results = useMemo( () => flowdata(filterdata) ); 
   return (
     <g className="marks">
       {graphdata.countries.features.map((feature) => (
+        <g>
         <path
           className="country"
           d={path(feature)}
@@ -89,7 +59,13 @@ export const Marks = () => {
               : '#e9f3e5'
           }
         />
+        <title>{feature.properties.name}</title>
+        </g> 
       ))}
+      <path
+        className="interiors"
+        d={path(graphdata.interiors)}
+      />
       {results.map( d => (
         <path className="flows"
             d={d3line(d)}
@@ -110,40 +86,8 @@ export const Marks = () => {
             fill={'#fbf419'}
             stroke={'#252525'}
           /> 
-     ) )} 
-      <path
-        className="interiors"
-        d={path(graphdata.interiors)}
-      />
+     ) )}
+      <Bar filterdata={filterdata} />
     </g>
   );
 };
-
-/*    {immidata.map( d => (
-   
-   <path className="flows" d={path(d)} />
-    )) 
-     }
-               <path
-            className="flows"
-            d={path(d)}
-            stroke={'#60c7ef'}
-            stroke-opacity={0.5}
-            fill={'none'}
-            stroke-width={sizeScale(d['2020'])}
-          />
-     <circle
-            r={2}
-            cx={projection(d.coordinates[0])[0]}
-            cy={projection(d.coordinates[0])[1]}
-            onClick={(e) => handleClick(e)}
-            cursor={'pointer'}
-            fill={'white'}
-            opacity={0.6}
-            stroke={'#252525'}
-          />
-           <path
-        className="sphere"
-        d={path({ type: 'Sphere' })}
-      />
-      <path className="graticules" d={path(graticule())} /> */
