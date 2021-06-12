@@ -23,12 +23,15 @@ body {
   overflow: hidden;
   font-family: 'Poppins', sans-serif;
 }
-pre {
-  font-size: 7em;
-}
-.tick line {
+
+.tickLeft line {
   stroke: #C0C0BB;
 }
+.tickLeft text{
+  font-size: 10px;
+  fill: #635F5D;
+}
+
 .tick text {
   fill: #635F5D;
 }
