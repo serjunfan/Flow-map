@@ -6,12 +6,12 @@ const countrytable = new Map();
     d['points'] = [+d.longitude, +d.latitude];
   });
   coordata.forEach((d, i) => {
-    if (d.name == 'United States')
+       if (d.name == 'United States')
       countrytable.set(
         'United States of America',
         d.points
       );
-    else countrytable.set(d.name, d.points);
+     else countrytable.set(d.name, d.points);
   });
   setuppoints(countrytable, immidata);
     immidata.forEach( d =>{
